@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { sql } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import { addToCartAction } from '@/lib/actions';
@@ -14,8 +15,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     <div className="max-w-6xl mx-auto px-5 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Afbeelding */}
-        <div className="bg-[#FDF2E9] rounded-lg h-[500px] flex items-center justify-center">
-          <span className="text-8xl opacity-25">🍫</span>
+        <div className="bg-[#FDF2E9] rounded-lg h-[500px] relative overflow-hidden">
+          <Image src={`/producten/${product.afbeelding}`} alt={product.naam} fill className="object-cover" />
         </div>
 
         {/* Info */}

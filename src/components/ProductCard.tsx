@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface ProductCardProps {
   id: number;
@@ -8,12 +9,12 @@ interface ProductCardProps {
   afbeelding: string;
 }
 
-export default function ProductCard({ id, naam, prijs, categorie }: ProductCardProps) {
+export default function ProductCard({ id, naam, prijs, categorie, afbeelding }: ProductCardProps) {
   return (
     <div className="bg-[#FDF2E9] rounded-lg overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
       <Link href={`/shop/${id}`}>
-        <div className="w-full h-64 bg-[#f0ddd0] flex items-center justify-center">
-          <span className="text-5xl opacity-30">🍫</span>
+        <div className="w-full h-64 bg-[#f0ddd0] relative">
+          <Image src={`/producten/${afbeelding}`} alt={naam} fill className="object-cover" />
         </div>
       </Link>
       <div className="p-4">
