@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getSession } from '@/lib/auth';
 import { getCartCount } from '@/lib/cart';
 import { logoutAction } from '@/lib/actions';
@@ -10,8 +11,9 @@ export default async function Header() {
   return (
     <header className="bg-[#2C1810] sticky top-0 z-50 shadow-lg">
       <nav className="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
-        <Link href="/" className="text-[#D4956A] text-2xl font-bold tracking-widest uppercase hover:text-[#e8b08a] transition-colors">
-          Stellatella
+        <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <Image src="/logo.png" alt="Stellatella" width={45} height={45} className="rounded-full" />
+          <span className="text-[#D4956A] text-2xl font-bold tracking-widest uppercase">Stellatella</span>
         </Link>
 
         <div className="flex gap-6 items-center">
