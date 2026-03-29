@@ -14,6 +14,7 @@ export default function Footer() {
             <Link href="/" className="text-sm hover:text-[#D4956A] transition-colors">Home</Link>
             <Link href="/informatie" className="text-sm hover:text-[#D4956A] transition-colors">Informatie</Link>
             <Link href="/shop" className="text-sm hover:text-[#D4956A] transition-colors">Shop</Link>
+            <Link href="/over-mij" className="text-sm hover:text-[#D4956A] transition-colors">Over Mij</Link>
           </div>
         </div>
         <div>
@@ -26,7 +27,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 text-center py-4 text-xs text-gray-500">
-        Stellatella &copy; {new Date().getFullYear()} | Gemaakt door Tara van den Enk
+        Stellatella &copy; {new Date().getFullYear()} | Gemaakt door Stella van den Enk
       </div>
     </footer>
   );

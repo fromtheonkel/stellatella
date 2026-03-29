@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handleiding — Stellatella</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bruin: #2C1810;
+      --chocolade: #8B4513;
+      --karamel: #D4956A;
+      --creme: #FFF8F0;
+      --licht-karamel: #FDF2E9;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--creme);
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* ===== COVER ===== */
+    .cover {
+      background: var(--bruin);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(212, 149, 106, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+      animation: coverGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes coverGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(10deg); }
+    }
+
+    .cover-label {
+      color: var(--karamel);
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.3s forwards;
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--karamel);
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.6s forwards;
+    }
+
+    .cover-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 18px;
+      font-weight: 300;
+      max-width: 500px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.9s forwards;
+    }
+
+    .cover-line {
+      width: 60px;
+      height: 2px;
+      background: var(--karamel);
+      margin: 30px auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 1s ease 1.2s forwards;
+    }
+
+    .cover-meta {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeDown 1s ease 1.5s forwards;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== INHOUDSOPGAVE ===== */
+    .toc {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 30px;
+    }
+
+    .toc h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--bruin);
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .toc-list {
+      list-style: none;
+      counter-reset: toc-counter;
+    }
+
+    .toc-list li {
+      counter-increment: toc-counter;
+      border-bottom: 1px dashed var(--karamel);
+      padding: 14px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 15px;
+    }
+
+    .toc-list li::before {
+      content: counter(toc-counter, decimal-leading-zero);
+      font-family: 'Playfair Display', serif;
+      color: var(--karamel);
+      font-size: 22px;
+      font-weight: 700;
+      min-width: 35px;
+    }
+
+    .toc-list a {
+      color: var(--bruin);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .toc-list a:hover { color: var(--chocolade); }
+
+    /* ===== SECTIES ===== */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 30px;
+    }
+
+    .section-divider {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .section-divider span {
+      display: inline-block;
+      width: 40px;
+      height: 2px;
+      background: var(--karamel);
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+
+    .section-divider em {
+      color: var(--karamel);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+    }
+
+    .section-number {
+      display: inline-block;
+      background: var(--chocolade);
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--bruin);
+      font-size: 28px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .section h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--chocolade);
+      font-size: 20px;
+      margin: 30px 0 12px;
+    }
+
+    .section p {
+      margin-bottom: 16px;
+      color: #555;
+    }
+
+    /* ===== MAGAZINE ELEMENTEN ===== */
+    .highlight-box {
+      background: var(--licht-karamel);
+      border-left: 4px solid var(--karamel);
+      padding: 25px 30px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .highlight-box p { margin-bottom: 0; }
+
+    .highlight-box strong {
+      color: var(--bruin);
+    }
+
+    .quote-block {
+      text-align: center;
+      padding: 40px 30px;
+      margin: 30px 0;
+    }
+
+    .quote-block p {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--chocolade);
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .code-block {
+      background: var(--bruin);
+      color: #e8d5c4;
+      padding: 20px 25px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .code-block::before {
+      content: attr(data-label);
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--chocolade);
+      color: white;
+      padding: 3px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 0 8px 0 8px;
+    }
+
+    .code-block .keyword { color: #D4956A; }
+    .code-block .string { color: #a8d8a8; }
+    .code-block .comment { color: #777; font-style: italic; }
+    .code-block .tag { color: #e8a87c; }
+    .code-block .attr { color: #b8d4e3; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 2px 15px rgba(44, 24, 16, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(44, 24, 16, 0.12);
+    }
+
+    .info-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .info-card h4 {
+      color: var(--bruin);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 0;
+    }
+
+    .file-tree {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 2;
+      color: var(--bruin);
+      box-shadow: 0 2px 15px rgba(44, 24, 16, 0.06);
+      margin: 20px 0;
+    }
+
+    .file-tree .folder { color: var(--chocolade); font-weight: 700; }
+    .file-tree .file { color: #666; }
+    .file-tree .desc { color: #aaa; font-family: 'Inter', sans-serif; font-size: 11px; }
+
+    .badge {
+      display: inline-block;
+      background: var(--licht-karamel);
+      color: var(--chocolade);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 3px;
+    }
+
+    .color-swatch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin: 5px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+    }
+
+    .color-swatch .dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.08);
+    }
+
+    .color-swatch .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bruin);
+    }
+
+    .color-swatch .hex {
+      font-size: 11px;
+      color: #999;
+      font-family: 'Courier New', monospace;
+    }
+
+    table.tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    table.tech-table th {
+      background: var(--bruin);
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    table.tech-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+    }
+
+    table.tech-table tr:hover td {
+      background: var(--licht-karamel);
+    }
+
+    /* ===== FULL WIDTH BANNER ===== */
+    .banner {
+      background: var(--bruin);
+      color: white;
+      text-align: center;
+      padding: 60px 30px;
+      margin: 40px 0;
+    }
+
+    .banner h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--karamel);
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .banner p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ===== FOOTER ===== */
+    .mag-footer {
+      background: var(--bruin);
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .mag-footer .name {
+      color: var(--karamel);
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    /* ===== SCROLL ANIMATIE ===== */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .section { padding: 40px 20px; }
+      .toc { padding: 60px 20px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .color-swatch { display: flex; }
+    }
+
+    @media print {
+      .cover { min-height: auto; padding: 60px 20px; page-break-after: always; }
+      .animate-in { opacity: 1 !important; transform: none !important; }
+      .banner { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-label">Technische Handleiding</div>
+    <h1>Stellatella</h1>
+    <p class="cover-subtitle">Hoe deze chocolade webshop is gebouwd: van idee tot werkende website</p>
+    <div class="cover-line"></div>
+    <p class="cover-meta">Stella van den Enk &middot; 2026</p>
+  </div>
+
+  <!-- INHOUDSOPGAVE -->
+  <div class="toc">
+    <h2>Inhoudsopgave</h2>
+    <ol class="toc-list">
+      <li><a href="#wat-is-het">Wat is Stellatella?</a></li>
+      <li><a href="#technologieen">Gebruikte technologieen</a></li>
+      <li><a href="#mappenstructuur">Hoe is het project opgebouwd?</a></li>
+      <li><a href="#frontend">De voorkant: wat de gebruiker ziet</a></li>
+      <li><a href="#backend">De achterkant: wat er achter de schermen gebeurt</a></li>
+      <li><a href="#database">De database: waar alles wordt opgeslagen</a></li>
+      <li><a href="#auth">Inloggen en accounts</a></li>
+      <li><a href="#winkelwagen">De winkelwagen</a></li>
+      <li><a href="#animaties">Animaties en interactie</a></li>
+      <li><a href="#deployment">Online zetten met Vercel</a></li>
+    </ol>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 01 WAT IS HET -->
+  <div class="section animate-in" id="wat-is-het">
+    <div class="section-number">01</div>
+    <h2>Wat is Stellatella?</h2>
+    <p>
+      Stellatella is een interactieve webshop voor chocolade. Bezoekers kunnen producten bekijken,
+      een account aanmaken, chocolade in hun winkelwagen plaatsen en een bestelling afronden.
+      Daarnaast is er een informatiepagina over hoe chocolade gemaakt wordt en een "Over Mij" pagina.
+    </p>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Belangrijk om te weten:</strong> een website bestaat uit twee delen.
+        De <strong>frontend</strong> is wat je ziet in de browser (knoppen, tekst, kleuren).
+        De <strong>backend</strong> is wat er achter de schermen gebeurt (data opslaan, inloggen controleren).
+      </p>
+    </div>
+
+    <h3>Wat kan de website?</h3>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="icon">🛍️</div>
+        <h4>Webshop</h4>
+        <p>Producten bekijken en bestellen</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">👤</div>
+        <h4>Accounts</h4>
+        <p>Registreren, inloggen, uitloggen</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🛒</div>
+        <h4>Winkelwagen</h4>
+        <p>Producten toevoegen en beheren</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">📖</div>
+        <h4>Informatie</h4>
+        <p>Over chocolade + YouTube video</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 02 TECHNOLOGIEEN -->
+  <div class="section animate-in" id="technologieen">
+    <div class="section-number">02</div>
+    <h2>Welke technologieen zijn gebruikt?</h2>
+    <p>
+      De website is gebouwd met moderne webontwikkeling tools. Hier is een overzicht van elke technologie en wat die doet:
+    </p>
+
+    <table class="tech-table">
+      <thead>
+        <tr>
+          <th>Technologie</th>
+          <th>Wat doet het?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Next.js 15</strong></td>
+          <td>Het framework (geraamte) van de website. Next.js maakt het makkelijk om pagina's te bouwen die snel laden.</td>
+        </tr>
+        <tr>
+          <td><strong>React</strong></td>
+          <td>Een library om de interface op te bouwen uit herbruikbare "componenten" (blokken).</td>
+        </tr>
+        <tr>
+          <td><strong>TypeScript</strong></td>
+          <td>Een uitbreiding op JavaScript die helpt fouten te voorkomen door types toe te voegen aan code.</td>
+        </tr>
+        <tr>
+          <td><strong>Tailwind CSS</strong></td>
+          <td>Een styling systeem waarmee je direct in je HTML kleuren, marges en layouts toevoegt via class-namen.</td>
+        </tr>
+        <tr>
+          <td><strong>Neon PostgreSQL</strong></td>
+          <td>De online database waar alle producten, gebruikers en bestellingen worden opgeslagen.</td>
+        </tr>
+        <tr>
+          <td><strong>bcryptjs</strong></td>
+          <td>Een library die wachtwoorden veilig versleutelt (hashed), zodat ze niet leesbaar zijn in de database.</td>
+        </tr>
+        <tr>
+          <td><strong>Vercel</strong></td>
+          <td>Het platform waar de website online staat (hosting). Bij elke update wordt de site automatisch opnieuw gebouwd.</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub</strong></td>
+          <td>Hier staat alle code opgeslagen. Werkt samen met Vercel: push je code, dan gaat de site automatisch live.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quote-block">
+      <p>"Next.js combineert de voorkant en achterkant in een project, zodat je niet twee aparte systemen hoeft te bouwen."</p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 03 MAPPENSTRUCTUUR -->
+  <div class="section animate-in" id="mappenstructuur">
+    <div class="section-number">03</div>
+    <h2>Hoe is het project opgebouwd?</h2>
+    <p>
+      Het project volgt de standaard structuur van Next.js. Elk bestand heeft een duidelijke plek en functie.
+      Hier zie je de belangrijkste mappen en bestanden:
+    </p>
+
+    <div class="file-tree">
+      <span class="folder">bonbon-boulevard/</span><br>
+      &nbsp;&nbsp;├── <span class="folder">public/</span> <span class="desc">— Afbeeldingen (logo, producten, over-mij)</span><br>
+      &nbsp;&nbsp;├── <span class="folder">src/</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">app/</span> <span class="desc">— Alle pagina's van de website</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="file">page.tsx</span> <span class="desc">— Homepage</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">shop/</span> <span class="desc">— Productoverzicht + detail</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">informatie/</span> <span class="desc">— Over chocolade</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">over-mij/</span> <span class="desc">— Fotogalerij</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">login/</span> <span class="desc">— Inlogpagina</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">registreer/</span> <span class="desc">— Registratiepagina</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">winkelwagen/</span> <span class="desc">— Winkelmandje</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">afrekenen/</span> <span class="desc">— Checkout</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── <span class="folder">account/</span> <span class="desc">— Bestelgeschiedenis</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="folder">components/</span> <span class="desc">— Herbruikbare bouwblokken</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="file">Header.tsx</span> <span class="desc">— Navigatiebalk bovenaan</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── <span class="file">Footer.tsx</span> <span class="desc">— Voettekst onderaan</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── <span class="file">ProductCard.tsx</span> <span class="desc">— Productkaartje</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── <span class="folder">lib/</span> <span class="desc">— Hulpfuncties</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">db.ts</span> <span class="desc">— Database verbinding</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">auth.ts</span> <span class="desc">— Inlog/sessie functies</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">cart.ts</span> <span class="desc">— Winkelwagen functies</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">actions.ts</span> <span class="desc">— Server Actions</span><br>
+      &nbsp;&nbsp;└── <span class="file">.env.local</span> <span class="desc">— Geheime instellingen (database URL)</span>
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Hoe werkt de App Router?</strong> In Next.js bepaalt de mapstructuur onder <code>app/</code> automatisch de URL's.
+        Een bestand op <code>app/shop/page.tsx</code> wordt vanzelf bereikbaar op <code>/shop</code>.
+        Geen extra configuratie nodig!
+      </p>
+    </div>
+  </div>
+
+  <div class="banner">
+    <h2>Frontend &amp; Backend</h2>
+    <p>De volgende twee hoofdstukken leggen uit wat de gebruiker ziet, en wat er achter de schermen gebeurt.</p>
+  </div>
+
+  <!-- 04 FRONTEND -->
+  <div class="section animate-in" id="frontend">
+    <div class="section-number">04</div>
+    <h2>De voorkant: wat de gebruiker ziet</h2>
+
+    <h3>Componenten</h3>
+    <p>
+      De website is opgebouwd uit <strong>componenten</strong> &mdash; herbruikbare bouwblokken.
+      De Header (navigatiebalk) is bijvoorbeeld een component die op elke pagina verschijnt.
+      Je schrijft de code een keer en gebruikt hem overal.
+    </p>
+
+    <div class="code-block" data-label="Component">
+<span class="comment">// ProductCard.tsx — Een kaartje voor elk product</span>
+<span class="keyword">export default function</span> <span class="tag">ProductCard</span>({ naam, prijs }) {
+  <span class="keyword">return</span> (
+    &lt;<span class="tag">div</span>&gt;
+      &lt;<span class="tag">h3</span>&gt;{naam}&lt;/<span class="tag">h3</span>&gt;
+      &lt;<span class="tag">p</span>&gt;Prijs: {prijs}&lt;/<span class="tag">p</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}
+    </div>
+
+    <h3>Styling met Tailwind CSS</h3>
+    <p>
+      In plaats van een apart CSS-bestand schrijf je stijlen direct als class-namen in de HTML.
+      Tailwind biedt duizenden kleine klassen die je combineert:
+    </p>
+
+    <div class="code-block" data-label="Tailwind">
+<span class="comment">&lt;!-- Traditionele CSS --&gt;</span>
+&lt;<span class="tag">button</span> <span class="attr">class</span>=<span class="string">"mijn-knop"</span>&gt;Klik&lt;/<span class="tag">button</span>&gt;
+<span class="comment">/* In apart CSS bestand: .mijn-knop { background: brown; color: white; } */</span>
+
+<span class="comment">&lt;!-- Met Tailwind CSS --&gt;</span>
+&lt;<span class="tag">button</span> <span class="attr">class</span>=<span class="string">"bg-[#8B4513] text-white px-8 py-3 rounded"</span>&gt;Klik&lt;/<span class="tag">button</span>&gt;
+<span class="comment">/* Geen apart bestand nodig! */</span>
+    </div>
+
+    <h3>Kleurenschema</h3>
+    <p>De website gebruikt een warm chocolade kleurenpalet:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0;">
+      <div class="color-swatch">
+        <div class="dot" style="background: #2C1810;"></div>
+        <div><div class="name">Donker Chocolade</div><div class="hex">#2C1810</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="dot" style="background: #8B4513;"></div>
+        <div><div class="name">Chocolade Bruin</div><div class="hex">#8B4513</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="dot" style="background: #D4956A;"></div>
+        <div><div class="name">Karamel</div><div class="hex">#D4956A</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="dot" style="background: #FFF8F0; border-color: #ddd;"></div>
+        <div><div class="name">Warm Creme</div><div class="hex">#FFF8F0</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="dot" style="background: #FDF2E9;"></div>
+        <div><div class="name">Licht Karamel</div><div class="hex">#FDF2E9</div></div>
+      </div>
+    </div>
+
+    <h3>Responsive Design</h3>
+    <p>
+      De website past zich aan aan elk scherm (telefoon, tablet, desktop).
+      Dit wordt gedaan met Tailwind's responsive prefixes:
+    </p>
+    <div class="code-block" data-label="Responsive">
+<span class="comment">/* text-xs op mobiel, text-sm op schermen breder dan 640px */</span>
+<span class="attr">className</span>=<span class="string">"text-xs sm:text-sm"</span>
+
+<span class="comment">/* 1 kolom op mobiel, 2 op tablet, 4 op desktop */</span>
+<span class="attr">className</span>=<span class="string">"grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"</span>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 05 BACKEND -->
+  <div class="section animate-in" id="backend">
+    <div class="section-number">05</div>
+    <h2>De achterkant: Server Actions</h2>
+    <p>
+      Normaal heb je een aparte backend server nodig om formulieren te verwerken.
+      Next.js heeft <strong>Server Actions</strong>: functies die op de server draaien maar direct vanuit je formulier aangeroepen kunnen worden.
+    </p>
+
+    <div class="code-block" data-label="Server Action">
+<span class="comment">// In actions.ts</span>
+<span class="string">'use server'</span>;
+
+<span class="keyword">export async function</span> <span class="tag">loginAction</span>(formData) {
+  <span class="keyword">const</span> naam = formData.get(<span class="string">'gebruikersnaam'</span>);
+  <span class="keyword">const</span> wachtwoord = formData.get(<span class="string">'wachtwoord'</span>);
+
+  <span class="comment">// Zoek gebruiker in database</span>
+  <span class="comment">// Controleer wachtwoord</span>
+  <span class="comment">// Maak sessie aan</span>
+}
+    </div>
+
+    <div class="code-block" data-label="Formulier">
+<span class="comment">&lt;!-- In login/page.tsx --&gt;</span>
+&lt;<span class="tag">form</span> <span class="attr">action</span>={<span class="tag">loginAction</span>}&gt;
+  &lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="string">"gebruikersnaam"</span> /&gt;
+  &lt;<span class="tag">input</span> <span class="attr">name</span>=<span class="string">"wachtwoord"</span> <span class="attr">type</span>=<span class="string">"password"</span> /&gt;
+  &lt;<span class="tag">button</span>&gt;Inloggen&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Hoe werkt het?</strong> Wanneer je op "Inloggen" klikt, stuurt het formulier de data
+        naar de <code>loginAction</code> functie. Die draait op de server, checkt de database,
+        en stuurt je door naar de juiste pagina. Alles zonder een aparte API te bouwen!
+      </p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 06 DATABASE -->
+  <div class="section animate-in" id="database">
+    <div class="section-number">06</div>
+    <h2>De database</h2>
+    <p>
+      Alle data wordt opgeslagen in een <strong>PostgreSQL database</strong> die draait bij Neon (een cloud database service).
+      De website maakt verbinding met de database via een <strong>DATABASE_URL</strong> &mdash; een soort adres dat in een geheim bestand staat.
+    </p>
+
+    <h3>Tabellen</h3>
+    <p>De database heeft 4 tabellen (denk aan Excel-sheets):</p>
+
+    <table class="tech-table">
+      <thead>
+        <tr><th>Tabel</th><th>Wat slaat het op?</th><th>Voorbeeldvelden</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>st_gebruikers</strong></td>
+          <td>Alle accounts</td>
+          <td>id, gebruikersnaam, email, hashedwachtwoord</td>
+        </tr>
+        <tr>
+          <td><strong>st_producten</strong></td>
+          <td>Alle chocoladeproducten</td>
+          <td>id, naam, beschrijving, prijs, afbeelding, categorie</td>
+        </tr>
+        <tr>
+          <td><strong>st_bestellingen</strong></td>
+          <td>Geplaatste bestellingen</td>
+          <td>id, gebruiker_id, totaal, datum</td>
+        </tr>
+        <tr>
+          <td><strong>st_bestelregels</strong></td>
+          <td>Producten per bestelling</td>
+          <td>id, bestelling_id, product_id, aantal, prijs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Hoe vraag je data op?</h3>
+    <div class="code-block" data-label="SQL Query">
+<span class="comment">// Alle producten ophalen uit de database</span>
+<span class="keyword">const</span> producten = <span class="keyword">await</span> sql`
+  <span class="tag">SELECT</span> * <span class="tag">FROM</span> st_producten
+  <span class="tag">ORDER BY</span> naam
+`;
+
+<span class="comment">// Een specifiek product ophalen</span>
+<span class="keyword">const</span> product = <span class="keyword">await</span> sql`
+  <span class="tag">SELECT</span> * <span class="tag">FROM</span> st_producten
+  <span class="tag">WHERE</span> id = ${productId}
+`;
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Waarom "st_"?</strong> Alle tabellen beginnen met <code>st_</code> (Stellatella).
+        Dit is om ze te onderscheiden van andere tabellen in dezelfde database die voor andere projecten worden gebruikt.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 07 AUTH -->
+  <div class="section animate-in" id="auth">
+    <div class="section-number">07</div>
+    <h2>Inloggen en accounts</h2>
+    <p>
+      Het inlogsysteem werkt met <strong>cookies</strong> &mdash; kleine stukjes data die je browser onthoudt.
+      Wanneer je inlogt, wordt er een cookie opgeslagen met je gebruikers-ID. Bij elk volgend bezoek
+      weet de website zo wie je bent.
+    </p>
+
+    <h3>Het inlogproces stap voor stap</h3>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin: 20px 0;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--chocolade); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700;">1</div>
+        <p style="margin: 0;">Gebruiker vult naam en wachtwoord in</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--chocolade); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700;">2</div>
+        <p style="margin: 0;">Server zoekt de gebruiker in de database</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--chocolade); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700;">3</div>
+        <p style="margin: 0;">Wachtwoord wordt vergeleken met de <strong>hash</strong> in de database (bcrypt)</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--chocolade); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700;">4</div>
+        <p style="margin: 0;">Als het klopt: cookie wordt aangemaakt met de gebruikers-ID</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--chocolade); color: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700;">5</div>
+        <p style="margin: 0;">Gebruiker wordt doorgestuurd naar de homepagina</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Wachtwoord hashing:</strong> Wachtwoorden worden nooit als platte tekst opgeslagen.
+        Ze worden omgezet in een onleesbare reeks tekens (een "hash").
+        Zelfs als iemand de database zou hacken, kan die de wachtwoorden niet lezen.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 08 WINKELWAGEN -->
+  <div class="section animate-in" id="winkelwagen">
+    <div class="section-number">08</div>
+    <h2>De winkelwagen</h2>
+    <p>
+      De winkelwagen wordt opgeslagen in een <strong>cookie</strong> &mdash; niet in de database.
+      Dit betekent dat je ook zonder account producten kunt toevoegen. De cookie bevat een lijstje
+      met product-ID's en aantallen.
+    </p>
+
+    <div class="code-block" data-label="Cookie data">
+<span class="comment">// Zo ziet de winkelwagen cookie eruit (JSON)</span>
+[
+  { <span class="string">"productId"</span>: <span class="tag">1</span>, <span class="string">"aantal"</span>: <span class="tag">2</span> },
+  { <span class="string">"productId"</span>: <span class="tag">5</span>, <span class="string">"aantal"</span>: <span class="tag">1</span> }
+]
+
+<span class="comment">// = 2x Klassieke Pralines + 1x Karamel Zeezout Bonbons</span>
+    </div>
+
+    <h3>Winkelwagen flow</h3>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="icon">➕</div>
+        <h4>Toevoegen</h4>
+        <p>Product wordt aan de cookie-lijst toegevoegd</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✏️</div>
+        <h4>Aantal wijzigen</h4>
+        <p>Het aantal in de cookie wordt aangepast</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🗑️</div>
+        <h4>Verwijderen</h4>
+        <p>Product wordt uit de cookie verwijderd</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✅</div>
+        <h4>Bestellen</h4>
+        <p>Cookie data gaat naar de database, cookie wordt geleegd</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 09 ANIMATIES -->
+  <div class="section animate-in" id="animaties">
+    <div class="section-number">09</div>
+    <h2>Animaties en interactie</h2>
+    <p>
+      De website gebruikt twee soorten animaties om de pagina's levendiger te maken:
+    </p>
+
+    <h3>1. Scroll-animaties (IntersectionObserver)</h3>
+    <p>
+      Elementen verschijnen met een vloeiende animatie wanneer je ernaartoe scrollt.
+      Dit werkt met de <strong>IntersectionObserver API</strong> &mdash; een browser-functie die detecteert
+      wanneer een element in beeld komt.
+    </p>
+
+    <div class="code-block" data-label="Scroll animatie">
+<span class="comment">// Detecteer wanneer een element zichtbaar wordt</span>
+<span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="tag">IntersectionObserver</span>(([entry]) => {
+  <span class="keyword">if</span> (entry.isIntersecting) {
+    setVisible(<span class="keyword">true</span>); <span class="comment">// Element is in beeld!</span>
+  }
+});
+
+<span class="comment">// Het element begint onzichtbaar en schuift omhoog</span>
+style={{
+  opacity: visible ? <span class="tag">1</span> : <span class="tag">0</span>,
+  transform: visible ? <span class="string">'translateY(0)'</span> : <span class="string">'translateY(30px)'</span>,
+  transition: <span class="string">'all 0.7s ease'</span>
+}}
+    </div>
+
+    <h3>2. Hover-effecten (CSS Transitions)</h3>
+    <p>
+      Knoppen en kaarten reageren wanneer je er met de muis overheen gaat.
+      Dit zijn pure CSS-effecten met <code>transition</code>:
+    </p>
+
+    <div class="code-block" data-label="Hover effect">
+<span class="comment">/* Product kaart gaat omhoog + schaduw bij hover */</span>
+<span class="attr">className</span>=<span class="string">"hover:-translate-y-1 hover:shadow-xl transition-all"</span>
+
+<span class="comment">/* Foto zoomt in bij hover */</span>
+<span class="attr">className</span>=<span class="string">"group-hover:scale-110 transition-transform duration-500"</span>
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Wat zijn Tailwind prefixes?</strong> In Tailwind voeg je <code>hover:</code> toe voor hover-effecten,
+        <code>sm:</code> voor tablet/desktop stijlen, en <code>group-hover:</code> om een kind-element te animeren
+        wanneer je over het ouder-element hovert.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-divider"><span></span><em>&hearts;</em><span></span></div>
+
+  <!-- 10 DEPLOYMENT -->
+  <div class="section animate-in" id="deployment">
+    <div class="section-number">10</div>
+    <h2>Online zetten met Vercel</h2>
+    <p>
+      De website wordt gehost op <strong>Vercel</strong>, het platform dat Next.js heeft gemaakt.
+      Het deployment proces is volledig automatisch:
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 15px; margin: 25px 0;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--licht-karamel); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--chocolade); white-space: nowrap;">Stap 1</div>
+        <p style="margin: 0;">Code wordt geschreven en getest op de eigen computer (<code>localhost</code>)</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--licht-karamel); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--chocolade); white-space: nowrap;">Stap 2</div>
+        <p style="margin: 0;">Wijzigingen worden ge-commit en ge-pushed naar <strong>GitHub</strong></p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--licht-karamel); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--chocolade); white-space: nowrap;">Stap 3</div>
+        <p style="margin: 0;">Vercel detecteert de push en bouwt de website automatisch opnieuw</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="background: var(--licht-karamel); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--chocolade); white-space: nowrap;">Stap 4</div>
+        <p style="margin: 0;">Binnen ~1 minuut staat de nieuwe versie live op het internet!</p>
+      </div>
+    </div>
+
+    <div class="code-block" data-label="Terminal">
+<span class="comment"># Code opslaan en publiceren</span>
+<span class="keyword">git</span> add .
+<span class="keyword">git</span> commit -m <span class="string">"Nieuwe functie toegevoegd"</span>
+<span class="keyword">git</span> push
+
+<span class="comment"># Dat is alles! Vercel doet de rest automatisch.</span>
+    </div>
+
+    <h3>Environment Variables</h3>
+    <p>
+      Geheime instellingen zoals de <strong>DATABASE_URL</strong> staan niet in de code (dat zou onveilig zijn).
+      Ze worden apart ingesteld in het Vercel dashboard als <em>Environment Variables</em>.
+      Lokaal staan ze in een <code>.env.local</code> bestand dat niet naar GitHub wordt geupload.
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="mag-footer">
+    <div class="name">Stellatella</div>
+    <p>Technische Handleiding &middot; Stella van den Enk &middot; 2026</p>
+  </div>
+
+  <!-- SCROLL ANIMATIE SCRIPT -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
